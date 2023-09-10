@@ -33,7 +33,7 @@ io.on('connection', (socket) => {
   });
   socket.on('newProduct', (data) =>{
     productos.push(data)
-    socket.emit('lista', productos)
+    io.emit('productsUpdate', productos)
   })
 });
 
@@ -47,14 +47,16 @@ app.use('/api/cart', cartRoutes);
 
 app.get('/new', (req, res) => {
   res.render('realTimeProducts', {
-    css: "styles.css"
+    css: "styles.css",
+    js: "realTimeScript.js"
   })
 })
 
 app.get('/static', (req, res) => {
   res.render('home', {
     title: "MAURO",
-    css: 'styles.css'
+    css: 'styles.css',
+    js: 'script.js'
   })
 })
 
